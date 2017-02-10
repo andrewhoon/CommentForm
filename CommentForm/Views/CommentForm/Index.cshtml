@@ -7,22 +7,28 @@
 <h2>Index</h2>
 
 <div class="row">
+@foreach (var item in Model)  //placed this here to initiate loop. Add curly brace at bottom
+{
     <div class="col-md-4">
         <div class="thumbnail">
-            <img src="..." alt="...">
+            
             <div class="caption">
-                <h3>Thumbnail label</h3>
-                <p>...</p>
-                <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                <h3>@Html.DisplayFor(modelItem => item.Name)</h3> <!--just copied and pasted from original below-->
+                <p>@Html.DisplayFor(modelItem => item.Comment)</p>
+                <p><span class="label label-default">@Html.DisplayNameFor(model => model.Priority)</span><strong> @Html.DisplayFor(modelItem => item.Priority)</strong></p>
+               @* <p><a href="#" class="btn btn-primary" role="button">Details</a></p> *@
+                @Html.ActionLink("Details", "Details", new { id = item.ID }, new { @class = "btn btn-primary", role = "button" }) <!--copied from bottom and added new stuff to make it a button-->
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-primary", role = "button" })
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "btn btn-primary", role = "button" })
             </div>
         </div>
     </div>
+}
 
 
-    <div class="col-md-4">
 
     </div>
-</div>
+
 
 
 
@@ -58,7 +64,7 @@
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }, new {class = "btn btn primary", role ="button"}) 
             @Html.ActionLink("Delete", "Delete", new { id=item.ID })
         </td>
     </tr>
